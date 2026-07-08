@@ -1,27 +1,238 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org" th:replace="~{ base :: layout( ~{::title}, ~{::section} ) }">
 <head>
-<meta charset="UTF-8">
-<title>Home:: Take Note</title>
+	<meta charset="UTF-8">
+	<title>Home :: Take Note</title>
 </head>
-
-<style>
-
-
-
-
-</style>
 
 <body>
 
 <section>
-<h2 class="fw-bold text-center">Welcome to Take Notes</h2>
-	<div class="container-fluid p-0 m-0" id="wasimbg">
-		
-		<img alt="Take Notes Background Image" src="/img/take-notes-backgournd-image.jpg" height="100%" width="100%">
-		
-	</div> 
-</section>
+	<!-- Custom styling just for the homepage -->
+	<style>
+		/* Container styling */
+        .home-hero-container {
+            position: relative;
+            width: 100%;
+            min-height: 80vh;
+            /* Background image with cover sizing */
+            background: url('/img/take-notes-backgournd-image.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 1.5rem 0;
+            padding: 3rem 1.5rem;
+        }
 
+        /* Dark modern gradient overlay to make text highly readable */
+        .home-hero-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%);
+            z-index: 1;
+        }
+
+        /* Content block */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            text-align: center;
+            color: #f8fafc;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Premium badge */
+        .hero-badge {
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* Main Heading */
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #a5b4fc, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Subtitle */
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Buttons layout */
+        .hero-actions {
+            display: flex;
+            gap: 1.25rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-cta-primary {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+            color: #ffffff;
+        }
+
+        .btn-cta-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f8fafc;
+        }
+
+        .btn-cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #f8fafc;
+        }
+
+        /* Mini features grid */
+        .mini-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .mini-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: left;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .mini-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .mini-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .mini-card p {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+        }
+	</style>
+
+	<!-- Main Container -->
+	<div class="container-fluid p-0">
+		<div class="home-hero-container">
+			<div class="hero-content">
+				<span class="hero-badge">✨ Smarter Note Taking</span>
+				<h1 class="hero-title">Organize your thoughts, <br><span>one note at a time.</span></h1>
+
+				<p class="hero-subtitle">
+					MindInk is a modern, responsive application designed to keep your ideas organized, your tasks managed, and your productivity at its peak.
+				</p>
+
+				<!-- Actions -->
+				<div class="hero-actions">
+					<!-- Synced with MainController mapping: /signin -->
+					<a th:href="@{/signin}" class="btn-cta btn-cta-primary">Sign In & Write</a>
+
+					<!-- Synced with MainController mapping: /register -->
+					<a th:href="@{/register}" class="btn-cta btn-cta-secondary">Create Account</a>
+				</div>
+
+				<!-- Features Grid -->
+				<div class="mini-features">
+					<div class="mini-card">
+						<span class="card-icon">⚡</span>
+						<h4>Instant Capture</h4>
+						<p>Write notes quickly and search through them in real-time.</p>
+					</div>
+					<div class="mini-card">
+						<span class="card-icon">📁</span>
+						<h4>Stay Organized</h4>
+						<p>Keep your ideas categorized and easy to locate.</p>
+					</div>
+					<div class="mini-card">
+						<span class="card-icon">🔒</span>
+						<h4>Secure Storing</h4>
+						<p>Safely login and manage notes privately on your account.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 </body>
 </html>

@@ -8,7 +8,6 @@ public class TakeNoteApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TakeNoteApplication.class, args);
-		System.out.println("Welcome to Spring Boot Take Note Applicatioin");
+		System.out.println("Welcome to Spring Boot MindInk Application");
 	}
-
 }
